@@ -51,12 +51,16 @@ public class Main {
 
     public static void main(String [] args){
         //.....
+
+
+
         //....
         ArrayList<Iris> list=new ArrayList<Iris>();   // list to be sorted
         ArrayList<Iris> tmp=new ArrayList<Iris>();   // temporary workspace
         //fill list
         //....
         //...
+
         //Create a copy from list for Bubble sort
         ArrayList <Iris> list2=new ArrayList<Iris>();
         for(int i=0;i<list.size();i++)
