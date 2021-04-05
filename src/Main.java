@@ -5,9 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    //Method declarations
-
-
+    //switch method to go with bubble sort
     public static void switchMethod(ArrayList<Iris> a, int f, int s){
         Iris temp = a.get(f);
         a.set(f, a.get(s));
@@ -15,6 +13,7 @@ public class Main {
     }
 
 
+    //bubble sort which loops and sorts
     public static void BubbleSort(ArrayList<Iris> a, int size){
         boolean swapped;
         for(int i = 0; i<size-1; i++){
@@ -34,12 +33,13 @@ public class Main {
     }
 
 
-    //change parameter to Iris
+    //merge sort which is recursive and calls mergesortedlist
     public static void mergeSort(ArrayList<Iris> a, ArrayList<Iris> tmp, int left, int right){
 
         if(left<right){
             int middle = (left+right)/2;
 
+            //recursion
             mergeSort(a, tmp, left, middle);
             mergeSort(a, tmp, middle+1, right);
 
@@ -47,14 +47,16 @@ public class Main {
 
         }
 
-        //fix me
     }
 
+    //merge sorted list method which sorts the array list
     public static void mergeSortedLists(ArrayList<Iris> a, ArrayList<Iris> tmp, int left, int middle, int right) {
         int first = left;
         int second = middle + 1;
 
         tmp = new ArrayList<Iris>();
+
+        //puts elements in order
 
         while(first<middle+1 && second<=right){
             if(a.get(first).isLessThan(a.get(second))){
@@ -86,14 +88,17 @@ public class Main {
 
         }
 
+
     public static <myFile> void main(String [] args){
+
+        //array lists
         ArrayList<Iris> list=new ArrayList<Iris>(); // list to be sorted
         ArrayList<Iris> tmp=new ArrayList<Iris>();   // temporary workspace
 
+        //making tmp same as list
         for(int i =0; i<list.size();i++){
             tmp.add(list.get(i));
         }
-
 
         //read from file
         FileInputStream myFile = null;
@@ -122,14 +127,12 @@ public class Main {
             list.add(new Iris(sepalLength, sepalWidth, petalLength, petalWidth, species));
         }
 
-        int k = 0;
-        while(list.size()<100){
-            list.add(list.get(k%list.size()));
-            k++;
+        //runs for this long
+        int update = 0;
+        while(list.size()<100000){
+            list.add(list.get(update%list.size()));
+            update = update + 1;
         }
-
-
-       //NEED TO CLOSE THE READER yes
 
 
         //Create a copy from list for Bubble sort
@@ -137,22 +140,31 @@ public class Main {
         for(int i=0;i<list.size();i++)
             list2.add(list.get(i));
 
+        //prints the information
+        for(Iris k : list){
+            System.out.println(k.toString());
+        }
 
 
-
+        //calculating mergesort runtime
         long startTime = System.nanoTime();
+
         // sort list using mergesort
         mergeSort(list, tmp, 0, list.size()-1);
+
+        //printing runtime
         long endTime = System.nanoTime();
         System.out.println("Time of MergeSort: " + (endTime-startTime)+ "ns");
 
-        for(Iris i : list){
-            System.out.println(i.toString());
-        }
 
+
+        //calculating bubble sort runtime
         startTime = System.nanoTime();
+
         //sort list2 using Bubble sort
         BubbleSort(list2, list2.size());
+
+        //printing runtime
         endTime = System.nanoTime();
         System.out.println("Time of BubbleSort: " + (endTime-startTime)+ "ns");
 

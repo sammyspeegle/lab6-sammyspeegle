@@ -73,28 +73,30 @@ public class Iris {
 
 
     //toString method
-    @Override //WHAT DID SHE WANT HERE????
+    @Override
     public String toString(){
         return "Sepal Length: " + getSepalLength() + " Sepal Width: " + getSepalWidth() + " Petal Length: " + getPetalLength() + " Petal Width: " + getPetalWidth() + " Species: " + getSpecies();
         //returns a string version of the information stored in the class
     }
 
+    //Comparator method
     public int Comparator(Iris Iris2){
-        irisComparator irisCompare = new irisComparator();
-        return irisCompare.compare(this, Iris2);
+        iComp compareIris = new iComp();
+        return compareIris.compare(this, Iris2);
     }
 
 
-    class irisComparator implements Comparator<Iris>{
+    class iComp implements Comparator<Iris>{
 
-        //compareTo method// only supposed to be one parameter???
+        //compare method which compares two iris
 
         public int compare(Iris Iris1, Iris Iris2){
 
-            //doube check dont need and
+
             int compareSepal = Double.compare(Iris1.getSepalLength(), Iris2.getSepalLength());
             int comparePetal = Double.compare(Iris1.getPetalLength(), Iris2.getPetalLength());
 
+            //determines what to return
             if(compareSepal == 0){
                 return comparePetal;
             }
@@ -107,9 +109,10 @@ public class Iris {
     }
 
 
+    //isLessThan method which returns true or false based on which iris is less than
    public boolean isLessThan(Iris Iris2){
-            irisComparator iCompare = new irisComparator();
-            if(iCompare.compare(this, Iris2)> 0){
+            iComp irisCompare = new iComp();
+            if(irisCompare.compare(this, Iris2)> 0){
                 return false;
             }
             else{
